@@ -5,6 +5,7 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import { errorHandler } from "./middlewares/error.middleware";
 import authRoutes from "./routes/auth.routes";
 
 dotenv.config();
@@ -22,5 +23,7 @@ app.use("/api/v1/auth", authRoutes);
 app.get("/health", (_req, res) => {
   res.json({ success: true, message: "API is running" });
 });
+
+app.use(errorHandler);
 
 export default app;
