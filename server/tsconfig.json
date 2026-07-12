@@ -9,12 +9,15 @@
     "strict": true,
 
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 
     "skipLibCheck": true,
 
     "forceConsistentCasingInFileNames": true,
 
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    "types": ["node"]
   },
 
   "include": ["src"]
