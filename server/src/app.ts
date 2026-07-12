@@ -7,6 +7,7 @@ import morgan from "morgan";
 
 import { errorHandler } from "./middlewares/error.middleware";
 import authRoutes from "./routes/auth.routes";
+import testRoutes from "./routes/test.routes";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(morgan("dev"));
 app.use(compression());
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/test", testRoutes);
 
 app.get("/health", (_req, res) => {
   res.json({ success: true, message: "API is running" });

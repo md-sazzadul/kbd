@@ -4,7 +4,7 @@ import { authorizeRoles } from "../middlewares/role.middleware";
 
 const router = Router();
 
-router.get("/protected", protectRoute, (req, res) => {
+router.get("/protected", protectRoute, (_req, res) => {
   res.json({
     success: true,
     message: "You accessed a protected route",
