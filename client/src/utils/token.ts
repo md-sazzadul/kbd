@@ -1,24 +1,73 @@
-const TOKEN_KEY = "kbd_token";
-const USER_KEY = "kbd_user";
+import type { User } from "../types/auth.types";
 
-export const saveToken = (token: string) => {
-  localStorage.setItem(TOKEN_KEY, token);
-};
+/*
+|--------------------------------------------------------------------------
+| Storage Keys
+|--------------------------------------------------------------------------
+|
+| Centralize all localStorage keys here.
+| If we ever rename them, we only change them in one place.
+|
+*/
 
-export const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY);
-};
+const STORAGE_KEYS = {
+  TOKEN: "kbd_token",
+  USER: "kbd_user",
+} as const;
 
-export const removeToken = () => {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
-};
+/*
+|--------------------------------------------------------------------------
+| Token Helpers
+|--------------------------------------------------------------------------
+*/
 
-export const saveUser = (user: unknown) => {
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
-};
+export function saveToken(token: string): void {
+  localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+}
 
-export const getUser = () => {
-  const value = localStorage.getItem(USER_KEY);
-  return value ? JSON.parse(value) : null;
-};
+export function getToken(): string | null {
+  return localStorage.getItem(STORAGE_KEYS.TOKEN);
+}
+
+export function removeToken(): void {
+  localStorage.removeItem(STORAGE_KEYS.TOKEN);
+}
+
+/*
+|--------------------------------------------------------------------------
+| User Helpers
+|--------------------------------------------------------------------------
+*/
+
+export function saveUser(user: User): void {
+  localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+}
+
+export function getUser(): User | null {
+  const storedUser = localStorage.getItem(STORAGE_KEYS.USER);
+
+  if (!storedUser) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(storedUser) as User;
+  } catch {
+    return null;
+  }
+}
+
+export function removeUser(): void {
+  localStorage.removeItem(STORAGE_KEYS.USER);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Clear Authentication
+|--------------------------------------------------------------------------
+*/
+
+export function clearAuth(): void {
+  removeToken();
+  removeUser();
+}
