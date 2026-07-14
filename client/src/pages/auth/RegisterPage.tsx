@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import { useAuth } from "../../context/AuthContext";
 import type { AuthResponse, UserRole } from "../../types/auth.types";
@@ -34,43 +34,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Register</h1>
-
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name"
-      />
-
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-
-      <select
-        value={role}
-        onChange={(e) => setRole(e.target.value as UserRole)}
-      >
-        <option value="participant">Participant</option>
-        <option value="admin">Admin</option>
-      </select>
-
-      {error && <p>{error}</p>}
-
-      <button type="submit">Create account</button>
-
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
-    </form>
+    <div className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">Register Page</h1>
+    </div>
   );
 }
