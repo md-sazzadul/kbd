@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import { useAuth } from "../../context/AuthContext";
 import type { AuthResponse } from "../../types/auth.types";
@@ -30,29 +30,8 @@ export default function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
-
-      <input
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-
-      {error && <p>{error}</p>}
-
-      <button type="submit">Login</button>
-
-      <p>
-        Don&apos;t have an account? <Link to="/register">Register</Link>
-      </p>
-    </form>
+    <div className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">Login Page</h1>
+    </div>
   );
 }
