@@ -10,7 +10,7 @@ import type { User } from "../types/auth.types";
 |
 */
 
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   TOKEN: "kbd_token",
   USER: "kbd_user",
 } as const;
