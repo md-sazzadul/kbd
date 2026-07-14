@@ -4,12 +4,8 @@ export default function DashboardPage() {
   const { user, logout } = useAuth();
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome, {user?.name}</p>
-      <p>Role: {user?.role}</p>
-
-      <button onClick={logout}>Logout</button>
+    <div className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">Dashboard</h1>
     </div>
   );
 }
