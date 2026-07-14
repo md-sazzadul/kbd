@@ -1,1 +1,76 @@
 @import "tailwindcss";
+
+/* ---------- Base ---------- */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #030712;
+  color: white;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Background ---------- */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.2),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(6, 182, 212, 0.15),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom,
+      rgba(14, 165, 233, 0.12),
+      transparent 40%
+    ),
+    #030712;
+}
+
+/* ---------- Selection ---------- */
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
