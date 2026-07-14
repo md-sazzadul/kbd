@@ -1,14 +1,21 @@
-import { getToken } from "../utils/token";
-import api from "./axios";
+import { api } from ".";
 
-export const getAuthHeaders = () => {
-  const token = getToken();
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
 
-  return {
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-  };
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+  role: "admin" | "participant";
+}
+
+export const login = (data: LoginRequest) => {
+  return api.post("/auth/login", data);
 };
 
-export default api;
+export const register = (data: RegisterRequest) => {
+  return api.post("/auth/register", data);
+};
