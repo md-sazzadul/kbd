@@ -87,9 +87,7 @@ body::before {
   }
 
   .card {
-    @apply glass
-      rounded-3xl
-      p-8;
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl rounded-3xl p-8;
   }
 
   .gradient-text {
