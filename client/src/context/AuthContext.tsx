@@ -1,31 +1,92 @@
 import type { ReactNode } from "react";
-import { createContext, useContext } from "react";
-import type { User } from "../types/auth.types";
+import { createContext, useEffect, useMemo, useState } from "react";
+import type { AuthContextType, User } from "../types";
+import {
+  clearAuth,
+  getToken,
+  getUser,
+  saveToken,
+  saveUser,
+} from "../utils/token";
+
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isLoggedIn: boolean;
-  login: (user: User, token: string) => void;
-  logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
 export function AuthProvider({ children }: AuthProviderProps) {
-  return <>{children}</>;
-}
+  const [user, setUser] = useState<User | null>(null);
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const [token, setToken] = useState<string | null>(null);
 
-  if (!context) {
-    throw new Error("useAuth must be used inside AuthProvider");
+  const [loading, setLoading] = useState(true);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Restore Session
+  |--------------------------------------------------------------------------
+  */
+
+  useEffect(() => {
+    const storedUser = getUser();
+    const storedToken = getToken();
+
+    if (storedUser && storedToken) {
+      setUser(storedUser);
+      setToken(storedToken);
+    }
+
+    setLoading(false);
+  }, []);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Login
+  |--------------------------------------------------------------------------
+  */
+
+  function login(user: User, token: string) {
+    saveUser(user);
+    saveToken(token);
+
+    setUser(user);
+    setToken(token);
   }
 
-  return context;
-};
+  /*
+  |--------------------------------------------------------------------------
+  | Logout
+  |--------------------------------------------------------------------------
+  */
+
+  function logout() {
+    clearAuth();
+
+    setUser(null);
+    setToken(null);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Context Value
+  |--------------------------------------------------------------------------
+  */
+
+  const value = useMemo(
+    () => ({
+      user,
+      token,
+      loading,
+
+      isAuthenticated: !!user && !!token,
+
+      login,
+
+      logout,
+    }),
+    [user, token, loading],
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
