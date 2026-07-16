@@ -1,18 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import NotFoundPage from "./pages/errors/NotFoundPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import RoleRoute from "./routes/RoleRoute";
-
-function AdminPage() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold">Admin Panel</h1>
-    </div>
-  );
-}
 
 export default function App() {
   return (
@@ -41,11 +34,22 @@ export default function App() {
         element={
           <ProtectedRoute>
             <RoleRoute allowedRoles={["admin"]}>
-              <AdminPage />
+              <AdminDashboardPage />
             </RoleRoute>
           </ProtectedRoute>
         }
       />
+
+      {/* <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <RoleRoute allowedRoles={["participant", "admin"]}>
+              <ProfilePage />
+            </RoleRoute>
+          </ProtectedRoute>
+        }
+      /> */}
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
