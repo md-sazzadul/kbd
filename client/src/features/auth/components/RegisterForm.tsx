@@ -19,6 +19,7 @@ import { registerSchema, type RegisterFormData } from "../schemas/auth.schema";
 
 import { register as registerRequest } from "../api/auth.api";
 
+import axios from "axios";
 import { useAuth } from "../../../hooks/useAuth";
 
 export default function RegisterForm() {
@@ -54,13 +55,19 @@ export default function RegisterForm() {
         role: "participant",
       });
 
-      login(response.data.data.user, response.data.data.token);
+      login(response.data.user, response.data.token);
 
       toast.success("Account created successfully!");
 
       navigate("/dashboard");
-    } catch (error: any) {
-      toast.error(error.response?.data?.message ?? "Registration failed.");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message ?? "Registration failed.");
+
+        return;
+      }
+
+      toast.error("Something went wrong.");
     }
   }
 
