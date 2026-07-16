@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { User } from "../types";
 import {
   clearAuth,
@@ -15,29 +15,9 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => getUser());
 
-  const [token, setToken] = useState<string | null>(null);
-
-  const [loading, setLoading] = useState(true);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Restore Session
-  |--------------------------------------------------------------------------
-  */
-
-  useEffect(() => {
-    const storedUser = getUser();
-    const storedToken = getToken();
-
-    if (storedUser && storedToken) {
-      setUser(storedUser);
-      setToken(storedToken);
-    }
-
-    setLoading(false);
-  }, []);
+  const [token, setToken] = useState<string | null>(() => getToken());
 
   /*
   |--------------------------------------------------------------------------
@@ -76,15 +56,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     () => ({
       user,
       token,
-      loading,
-
+      loading: false,
       isAuthenticated: !!user && !!token,
-
       login,
-
       logout,
     }),
-    [user, token, loading],
+    [user, token],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
