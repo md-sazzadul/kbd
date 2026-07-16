@@ -4,6 +4,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import NotFoundPage from "./pages/errors/NotFoundPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import RoleRoute from "./routes/RoleRoute";
 
@@ -40,7 +41,7 @@ export default function App() {
         }
       />
 
-      {/* <Route
+      <Route
         path="/profile"
         element={
           <ProtectedRoute>
@@ -49,7 +50,7 @@ export default function App() {
             </RoleRoute>
           </ProtectedRoute>
         }
-      /> */}
+      />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
