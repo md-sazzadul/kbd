@@ -59,7 +59,9 @@ export default function RegisterForm() {
 
       toast.success("Account created successfully!");
 
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message ?? "Registration failed.");
