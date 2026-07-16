@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
-import Spinner from "../components/common/Spinner";
+import FullScreenLoader from "../components/common/FullScreenLoader";
 import { useAuth } from "../hooks/useAuth";
 import type { Role } from "../types";
 
@@ -20,11 +20,7 @@ export default function RoleRoute({ children, allowedRoles }: RoleRouteProps) {
   */
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
+    return <FullScreenLoader message="Loading dashboard..." />;
   }
 
   /*
