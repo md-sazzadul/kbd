@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { Lock, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -41,10 +42,14 @@ export default function LoginForm() {
       toast.success("Welcome back!");
 
       navigate("/dashboard");
-    } catch (error: any) {
-      toast.error(
-        error.response?.data?.message ?? "Invalid email or password.",
-      );
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message ?? "Login failed.");
+
+        return;
+      }
+
+      toast.error("Something went wrong.");
     }
   }
 
