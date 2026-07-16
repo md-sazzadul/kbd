@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { createContext, useEffect, useMemo, useState } from "react";
-import type { AuthContextType, User } from "../types";
+import { useEffect, useMemo, useState } from "react";
+import type { User } from "../types";
 import {
   clearAuth,
   getToken,
@@ -8,8 +8,7 @@ import {
   saveToken,
   saveUser,
 } from "../utils/token";
-
-export const AuthContext = createContext<AuthContextType | null>(null);
+import { AuthContext } from "./AuthContext";
 
 interface AuthProviderProps {
   children: ReactNode;
