@@ -36,7 +36,7 @@ export default function LoginForm() {
         password: data.password,
       });
 
-      login(response.data.data.user, response.data.data.token);
+      login(response.data.user, response.data.token);
 
       toast.success("Welcome back!");
 
