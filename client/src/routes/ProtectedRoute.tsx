@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 
-import Spinner from "../components/common/Spinner";
+import FullScreenLoader from "../components/common/FullScreenLoader";
 import { useAuth } from "../hooks/useAuth";
 
 interface ProtectedRouteProps {
@@ -19,11 +19,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   */
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
+    return <FullScreenLoader message="Checking your session..." />;
   }
 
   /*
