@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
+import FullScreenLoader from "../../components/common/FullScreenLoader";
 import Logo from "../../components/common/Logo";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import { useAuth } from "../../hooks/useAuth";
@@ -19,7 +20,7 @@ export default function DashboardPage() {
   }
 
   if (!user) {
-    return null;
+    return <FullScreenLoader message="Loading your dashboard..." />;
   }
 
   return (
