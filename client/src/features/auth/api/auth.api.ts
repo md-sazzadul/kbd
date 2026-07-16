@@ -1,5 +1,9 @@
-import { api } from ".";
-import type { AuthResponse, LoginRequest, RegisterRequest } from "../types";
+import { api } from "../../../api";
+import type {
+  AuthResponse,
+  LoginRequest,
+  RegisterRequest,
+} from "../../../types";
 
 export const login = (data: LoginRequest) =>
   api.post<AuthResponse>("/auth/login", data);

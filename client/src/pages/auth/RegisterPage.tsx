@@ -1,12 +1,13 @@
 import AuthLayout from "../../components/layout/AuthLayout";
+import { RegisterForm } from "../../features/auth";
 
 export default function RegisterPage() {
   return (
     <AuthLayout
       title="Create Account"
-      subtitle="Start organizing and competing in tournaments today."
+      subtitle="Join KBD and start managing tournaments."
     >
-      <p className="text-center text-gray-300">Register Form Coming Soon</p>
+      <RegisterForm />
     </AuthLayout>
   );
 }

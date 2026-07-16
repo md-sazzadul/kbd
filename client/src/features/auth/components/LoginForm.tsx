@@ -4,10 +4,10 @@ import { Lock, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { login as loginRequest } from "../../../api/auth.api";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/common/Input";
 import { useAuth } from "../../../hooks/useAuth";
+import { login as loginRequest } from "../api/auth.api";
 import { loginSchema, type LoginFormData } from "../schemas/auth.schema";
 
 export default function LoginForm() {
