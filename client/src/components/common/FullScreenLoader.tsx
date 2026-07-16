@@ -26,7 +26,18 @@ export default function FullScreenLoader({
         }}
         className="flex flex-col items-center"
       >
-        <Logo />
+        <motion.div
+          animate={{
+            y: [0, -6, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Logo />
+        </motion.div>
 
         <div className="my-8">
           <Spinner size={48} />
