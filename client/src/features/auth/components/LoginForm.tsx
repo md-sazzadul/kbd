@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Lock, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/common/Input";
 import { useAuth } from "../../../hooks/useAuth";
@@ -15,6 +15,10 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const { login } = useAuth();
+
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname ?? "/dashboard";
 
   const {
     register,
@@ -41,7 +45,9 @@ export default function LoginForm() {
 
       toast.success("Welcome back!");
 
-      navigate("/dashboard");
+      navigate(from, {
+        replace: true,
+      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message ?? "Login failed.");
