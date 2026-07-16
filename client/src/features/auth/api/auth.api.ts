@@ -5,8 +5,11 @@ import type {
   RegisterRequest,
 } from "../../../types";
 
-export const login = (data: LoginRequest) =>
-  api.post<AuthResponse>("/auth/login", data);
+export async function login(data: LoginRequest): Promise<AuthResponse> {
+  const response = await api.post<AuthResponse>("/auth/login", data);
+
+  return response.data;
+}
 
 export const register = (data: RegisterRequest) => {
   return api.post<AuthResponse>("/auth/register", data);
